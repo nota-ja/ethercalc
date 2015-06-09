@@ -12,8 +12,8 @@
     services = JSON.parse(process.env.VCAP_SERVICES || '{}');
     for (name in services) {
       items = services[name];
-      if (/^redis/.test(name) && (items != null && items.length)) {
-        ref1$ = [(ref$ = items[0].credentials)['port'], ref$['hostname'], ref$['password']], redisPort = ref1$[0], redisHost = ref1$[1], redisPass = ref1$[2];
+      if (/redis/.test(name) && (items != null && items.length)) {
+        ref1$ = [(ref$ = items[0].credentials)['port'], ref$['host'], ref$['password']], redisPort = ref1$[0], redisHost = ref1$[1], redisPass = ref1$[2];
       }
     }
     redisHost == null && (redisHost = 'localhost');

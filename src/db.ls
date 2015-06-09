@@ -9,8 +9,8 @@
     process.env.VCAP_SERVICES or '{}'
 
   for name, items of services
-    | /^redis/.test name and items?length
-      [redisPort, redisHost, redisPass] = items.0.credentials<[ port hostname password ]>
+    | /redis/.test name and items?length
+      [redisPort, redisHost, redisPass] = items.0.credentials<[ port host password ]>
 
   redisHost ?= \localhost
   redisPort ?= 6379
