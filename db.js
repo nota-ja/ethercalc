@@ -3,7 +3,7 @@
   var slice$ = [].slice;
   this.__DB__ = null;
   this.include = function(){
-    var env, ref$, redisPort, redisHost, redisPass, redisDb, dataDir, services, name, items, ref1$, redis, makeClient, RedisStore, db, EXPIRE, this$ = this;
+    var env, ref$, redisPort, redisHost, redisPass, redisDb, dataDir, services, name, items, ref1$, ref2$, redis, makeClient, RedisStore, db, EXPIRE, this$ = this;
     if (this.__DB__) {
       return this.__DB__;
     }
@@ -12,8 +12,11 @@
     services = JSON.parse(process.env.VCAP_SERVICES || '{}');
     for (name in services) {
       items = services[name];
+      if (name === "p-redis" && (items != null && items.length)) {
+        ref1$ = [(ref$ = items[0].credentials)['port'], ref$['host'], ref$['password']], redisPort = ref1$[0], redisHost = ref1$[1], redisPass = ref1$[2];
+      }
       if (/^redis/.test(name) && (items != null && items.length)) {
-        ref1$ = [(ref$ = items[0].credentials)['port'], ref$['hostname'], ref$['password']], redisPort = ref1$[0], redisHost = ref1$[1], redisPass = ref1$[2];
+        ref2$ = [(ref1$ = items[0].credentials)['port'], ref1$['hostname'], ref1$['password']], redisPort = ref2$[0], redisHost = ref2$[1], redisPass = ref2$[2];
       }
     }
     redisHost == null && (redisHost = 'localhost');
